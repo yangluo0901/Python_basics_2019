@@ -21,7 +21,7 @@ for n in range(1, 101):
 
 for element in thread_list:
     element.start()
-    # element.join()  # wait until the thread terminates, this blocks the calling thread (main thread) until the thread whose join()
+    element.join()  # wait until the thread terminates, this blocks the calling thread (main thread) until the thread whose join()
                     # method is called terminates
 
 
