@@ -1,7 +1,7 @@
 from share import Share
 from dbmanager import DbManager
 from person import Person
-from sendemail import SendEmail
+from send_email import SendEmail
 import time
 
 db_manager = DbManager()
@@ -16,14 +16,17 @@ def set_up_db():
 
     for share in shares:
         db_manager.add_share_entry(share)
+        print(f"share {share.name} added !")
 
     for person in persons:
         db_manager.add_person_entry(person)
+        print(f"person {person.first_name} added !")
 
 
 def update_share_info():
     for share in shares:
         share.update()
+        print(f"updating {share.name}")
         db_manager.update_share_entry(share)
 
 

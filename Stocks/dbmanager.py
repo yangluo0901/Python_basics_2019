@@ -17,20 +17,21 @@ class DbManager(object):
     def add_share_entry(self, share):
         sql = "INSERT INTO PythonDataBase.Shares VALUES (%s, %s, %s, %s, %s, %s)"
         self.cursor.execute(sql, (share.code, share.name, share.high, share.low, share.volume, share.trade))
+        self.change_commit()
 
     def add_person_entry(self, person):
-        sql = "INSERT INTO PythonDataBase.Shares VALUES (%s, %s)"
+        sql = "INSERT INTO PythonDataBase.Persons VALUES (NULL, %s, %s)"
         self.cursor.execute(sql, (person.first_name, person.last_name))
+        self.change_commit()
 
     def update_share_entry(self, share):
-        sql = "FROM TABLE PythonDataBase.Shares SET share_name = %s," \
-              "high = %s, low = %s, volume = %s, trade = %s WHERE share_code = %s"
-        self.cursor.execute(sql, (share.share_name, share.high,
-                                  share.low, share.volume,
-                                  "data updated !"))
+        sql = ''' UPDATE  PythonDataBase.Shares SET share_name = %s, high = %s, low = %s, volume = %s, trade = %s WHERE share_code = %s'''
+        print(share.name, share.high, share.low, share.volume, 100, share.code)
+        self.cursor.execute(sql, (share.name, float(share.high), float(share.low), int(share.volume), 100, share.code))
+        self.change_commit()
 
     def change_commit(self):
-        self.cursor.close()
+        self.__db_helper.conn.commit()
 
     def close(self):
         self.cursor.close()

@@ -1,5 +1,29 @@
-import tushare
+class A(object):
+    def __init__(self):
+        self.word = "This is A !"
 
-share_info = tushare.get_realtime_quotes("000591")
-# share_info[["code", "name", "high", "low", "volume", "trade "]]
-print(share_info)
+    def print(self):
+        print(self.word)
+
+
+class B(A):
+    def __init__(self):
+        self.word = "This is B"
+
+    def print(self):
+        print(self.word)
+
+
+class C(B):
+    def __init__(self):
+        self.word = "This is C"
+
+    def print(self):
+        super(B, b).print()
+
+
+
+a = A()
+b = B()
+c = C()
+c.print()
